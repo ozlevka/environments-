@@ -1,7 +1,7 @@
-let a: string = "Hello world";
+let a: string = "Hello World"
 
 
-console.log(a);
+console.log(a)
 
 
-console.log("finish");
+console.log("Finish")
