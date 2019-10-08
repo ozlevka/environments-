@@ -1,7 +1,1 @@
-let a: string = "Hello World"
-
-
-console.log(a)
-
-
-console.log("Finish")
+import * as FileSystem from 'fs'
