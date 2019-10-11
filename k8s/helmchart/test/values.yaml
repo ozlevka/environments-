@@ -1,0 +1,13 @@
+# Default values for test.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+elasticsearch:
+  replicas: 1
+  minimumMasterNodes: 1
+  persistence:
+    enabled: false
+kibana:
+  service:
+    type: NodePort
+    nodePort: 30561
+    port: 5601
