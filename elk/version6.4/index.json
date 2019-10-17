@@ -1,0 +1,67 @@
+{
+    "settings": {
+      "number_of_shards": 3,
+      "number_of_replicas": 0,
+      "analysis": {
+        "filter": {
+          "autocomplete_filter": {
+            "type": "edge_ngram",
+            "min_gram": 1,
+            "max_gram": 20
+          }
+        },
+        "analyzer": {
+          "autocomplete": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+              "lowercase",
+              "autocomplete_filter"
+            ]
+          }
+        }
+      }
+    },
+    "mappings": {
+      "_doc": {
+        "properties": {
+          "airport_name": {
+            "type": "text",
+            "fields": {
+              "ngram": {
+                "type": "text",
+                "analyzer": "autocomplete"
+              }
+            }
+          },
+          "airport_code": {
+            "type": "keyword",
+            "fields": {
+              "ngram": {
+                "type": "text",
+                "analyzer": "autocomplete"
+              }
+            }
+          },
+          "city_name": {
+            "type": "keyword",
+            "fields": {
+              "ngram": {
+                "type": "text",
+                "analyzer": "autocomplete"
+              }
+            }
+          },
+          "country_name": {
+            "type": "keyword",
+            "fields": {
+              "ngram": {
+                "type": "text",
+                "analyzer": "autocomplete"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
