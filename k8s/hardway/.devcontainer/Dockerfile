@@ -32,7 +32,7 @@ RUN apt-get update \
     && mv terraform /usr/bin \
     && rm terraform_0.12.7_linux_amd64.zip \
     # Install kubectl
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.14.6/bin/linux/amd64/kubectl \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/bin/ \
     # Install Helm
@@ -40,7 +40,13 @@ RUN apt-get update \
     && tar xvfz helm-v2.14.3-linux-amd64.tar.gz \
     && chmod +x ./linux-amd64/helm \
     && mv ./linux-amd64/helm /usr/bin \
-    && rm -rf helm-v2.14.3-linux-amd64.tar.gz linux-amd64\
+    && rm -rf helm-v2.14.3-linux-amd64.tar.gz linux-amd64 \
+    #
+    # Install Kubernetes client tools
+    && wget -q --show-progress --https-only --timestamping -O /usr/local/bin/cfssl https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssl \
+    && chmod +x /usr/local/bin/cfssl \
+    && wget -q --show-progress --https-only --timestamping -O /usr/local/bin/cfssljson https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssljson \
+    && chmod +x /usr/local/bin/cfssljson \
     #
     # Clean up
     && apt-get autoremove -y \
