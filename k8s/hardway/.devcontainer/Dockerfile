@@ -27,10 +27,10 @@ RUN apt-get update \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     # Install terraform 
-    && wget --quiet https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip \
-    && unzip terraform_0.12.7_linux_amd64.zip \
+    && wget --quiet https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip \
+    && unzip terraform_0.12.16_linux_amd64.zip \
     && mv terraform /usr/bin \
-    && rm terraform_0.12.7_linux_amd64.zip \
+    && rm terraform_0.12.16_linux_amd64.zip \
     # Install kubectl
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
