@@ -1,3 +1,4 @@
 #!/bin/bash
 
-cfssl gencert -initca ca-csr.json | cfssljson -bare ca 
+echo "Generate Certificate Authority"
+cfssl gencert -initca /workspaces/environments-/k8s/hardway/certifcates/ca-csr.json | cfssljson -bare ca 
