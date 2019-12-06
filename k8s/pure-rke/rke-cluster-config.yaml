@@ -1,0 +1,17 @@
+kubernetes_version: v1.14.9-rancher1-1
+nodes:
+  - hostname_override: kube-1
+    address: 178.128.198.64
+    user: root
+    role: [controlplane,worker,etcd]
+    ssh_key_path: /home/vscode/certs/do
+  - hostname_override: kube-2
+    address: 142.93.103.177
+    user: root
+    role: [controlplane,worker,etcd]
+    ssh_key_path: /home/vscode/certs/do
+  - hostname_override: kube-3
+    address: 142.93.166.109
+    user: root
+    role: [controlplane,worker,etcd]
+    ssh_key_path: /home/vscode/certs/do
