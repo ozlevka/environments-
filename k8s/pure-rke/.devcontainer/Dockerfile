@@ -13,7 +13,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git procps lsb-release wget curl \
+    && apt-get -y install git procps lsb-release wget curl unzip \
     #
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
@@ -36,6 +36,11 @@ RUN apt-get update \
     # Install RKE
     && curl -LO https://github.com/rancher/rke/releases/download/v1.0.0/rke_linux-amd64 \
     && mv ./rke_linux-amd64 /usr/bin/rke && chmod +x /usr/bin/rke \ 
+    # Install terraform
+    && curl -LO https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_linux_amd64.zip \
+    && unzip terraform_0.12.17_linux_amd64.zip \
+    && mv terraform /usr/bin \
+    && rm -f terraform_0.12.17_linux_amd64.zip \
     #
     # Clean up
     && apt-get autoremove -y \
