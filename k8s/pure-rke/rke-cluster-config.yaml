@@ -1,20 +1,20 @@
 kubernetes_version: v1.14.9-rancher1-1
 nodes:
   - hostname_override: kube-1
-    internal_address: 10.135.137.110
-    address: 104.248.135.142
-    user: root
+    internal_address: 192.168.2.49
+    address: 3.215.117.104
+    user: ubuntu
     role: [controlplane,worker,etcd]
-    ssh_key_path: /home/vscode/certs/do
+    ssh_key_path: /home/vscode/certs/amazon
   - hostname_override: kube-2
-    address: 104.248.252.54
-    internal_address: 10.135.138.38
-    user: root
+    address: 34.201.49.24
+    internal_address: 192.168.2.221
+    user: ubuntu
     role: [controlplane,worker,etcd]
-    ssh_key_path: /home/vscode/certs/do
+    ssh_key_path: /home/vscode/certs/amazon
   - hostname_override: kube-3
-    address: 104.248.252.216
-    internal_address: 10.135.130.197
-    user: root
+    address: 3.224.147.55
+    internal_address: 192.168.2.155
+    user: ubuntu
     role: [controlplane,worker,etcd]
-    ssh_key_path: /home/vscode/certs/do
+    ssh_key_path: /home/vscode/certs/amazon
