@@ -1,0 +1,49 @@
+version: "3.7"
+
+
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+    environment:
+      - node.name=elastic
+      - discovery.seed_hosts=elastic
+      - cluster.initial_master_nodes=elastic
+      - cluster.name=mycluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    privileged: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - default
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.0
+    environment:
+       - "KIBANA_CMD=-e http://elastic:9200"
+       - "ELASTICSEARCH_URL=http://elastic:9200"
+       - "ELASTICSEARCH_HOSTS=http://elastic:9200"
+    networks:
+      - default
+    links:
+      - elastic
+    depends_on:
+      - elastic
+    ports:
+      - 5601:5601
+  
+  development: 
+      build:
+        context: .
+      command: /bin/sh -c "while sleep 1000; do :; done"
+      volumes:
+        - type: bind
+          source: /home/ozlevka/second/projects/search
+          target: /home/vscode/dev
+
+networks: 
+  default:
