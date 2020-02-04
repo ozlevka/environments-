@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  mongo1:
+    image: mongo:4.2.3
+    command: mongod --config /mongo/config/mongo1.conf
+    ports: 
+      - "27017:27017"
+    volumes:
+      - "/Users/lev/mongokeys:/mongo/keys"
+      - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+  mongo2:
+    image: mongo:4.2.3
+    command: mongod --config /mongo/config/mongo2.conf
+    ports: 
+      - "27018:27017"
+    volumes:
+      - "/Users/lev/mongokeys:/mongo/keys"
+      - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+  mongo3:
+    image: mongo:4.2.3
+    command: mongod --config /mongo/config/mongo3.conf
+    ports: 
+      - "27019:27017"
+    volumes:
+      - "/Users/lev/mongokeys:/mongo/keys"
+      - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+  
+  development:
+    build:
+      context: .
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes: 
+      - "/Users/lev/Projects/environments-/mongoDB/cluster:/home/vscode/workspace"
+      - "/Users/lev/mongokeys:/mongo/keys"
+    
