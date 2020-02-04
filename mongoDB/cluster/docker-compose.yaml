@@ -3,7 +3,7 @@ version: "3.7"
 services:
   mongo1:
     image: mongo:4.2.3
-    command: mongod --config /mongo/config/mongo1.conf
+    command: /mongo/config/start-replicaset.sh
     ports: 
       - "27017:27017"
     volumes:
@@ -11,7 +11,7 @@ services:
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
   mongo2:
     image: mongo:4.2.3
-    command: mongod --config /mongo/config/mongo2.conf
+    command: mongod --config /mongo/config/mongo.conf
     ports: 
       - "27018:27017"
     volumes:
@@ -19,9 +19,16 @@ services:
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
   mongo3:
     image: mongo:4.2.3
-    command: mongod --config /mongo/config/mongo3.conf
+    command: mongod --config /mongo/config/mongo.conf
     ports: 
       - "27019:27017"
+    volumes:
+      - "/Users/lev/mongokeys:/mongo/keys"
+      - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+
+  mongo4:
+    image: mongo:4.2.3
+    command: mongod --config /mongo/config/arbiter.conf
     volumes:
       - "/Users/lev/mongokeys:/mongo/keys"
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"

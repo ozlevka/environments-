@@ -7,7 +7,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog curl 2>&1 \
     && apt-get -y install git gnupg gnupg2 gnupg1 \
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
