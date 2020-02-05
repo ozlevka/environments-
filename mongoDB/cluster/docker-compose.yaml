@@ -3,12 +3,13 @@ version: "3.7"
 services:
   mongo1:
     image: mongo:4.2.3
-    command: /mongo/config/start-replicaset.sh
+    command: /mongo/config/start-replicaset.sh ${SSH_ENABLED}
     ports: 
       - "27017:27017"
     volumes:
       - "/Users/lev/mongokeys:/mongo/keys"
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+      - "mongo1:/data/db"
   mongo2:
     image: mongo:4.2.3
     command: mongod --config /mongo/config/mongo.conf
@@ -17,6 +18,7 @@ services:
     volumes:
       - "/Users/lev/mongokeys:/mongo/keys"
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+      - "mongo2:/data/db"
   mongo3:
     image: mongo:4.2.3
     command: mongod --config /mongo/config/mongo.conf
@@ -25,6 +27,7 @@ services:
     volumes:
       - "/Users/lev/mongokeys:/mongo/keys"
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+      - "mongo3:/data/db"
 
   mongo4:
     image: mongo:4.2.3
@@ -32,6 +35,12 @@ services:
     volumes:
       - "/Users/lev/mongokeys:/mongo/keys"
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/mongo/config"
+      - "mongo4:/data/db"
+
+  admin:
+    image: ozlevka/mongo-admin:1
+    ports: 
+       - 35745:35745
   
   development:
     build:
@@ -40,4 +49,10 @@ services:
     volumes: 
       - "/Users/lev/Projects/environments-/mongoDB/cluster:/home/vscode/workspace"
       - "/Users/lev/mongokeys:/mongo/keys"
+  
+volumes:
+  mongo1:
+  mongo2:
+  mongo3:
+  mongo4:
     

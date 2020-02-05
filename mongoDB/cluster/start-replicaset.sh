@@ -8,13 +8,21 @@ sleep 25
 
 echo "going create replicaset"
 
-mongo --tls --tlsAllowInvalidCertificates mongo1:27017 < /mongo/config/rsdeploy.js
+if [[ -z "$SSH_ENABLED" ]]; then
+    mongo  mongo1:27017 < /mongo/config/rsdeploy.js
+else
+    mongo --tls --tlsAllowInvalidCertificates mongo1:27017 < /mongo/config/rsdeploy.js
+fi
 
 sleep 15
 
 echo "Add arbiter"
 
-mongo --tls --tlsAllowInvalidCertificates mongo1:27017 --eval 'rs.addArb("mongo4:30000")'
+if [[ -z "$SSH_ENABLED" ]]; then
+    mongo mongo1:27017 --eval 'rs.addArb("mongo4:30000")'
+else
+    mongo --tls --tlsAllowInvalidCertificates mongo1:27017 --eval 'rs.addArb("mongo4:30000")'
+fi
 
 echo "Start main process"
 
