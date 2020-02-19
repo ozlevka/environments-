@@ -42,7 +42,7 @@ services:
       command: /bin/sh -c "while sleep 1000; do :; done"
       volumes:
         - type: bind
-          source: /home/ozlevka/second/projects/search
+          source: ./
           target: /home/vscode/dev
 
 networks: 
