@@ -1,0 +1,33 @@
+{
+  "name": "remote-browser-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "pretty-quick": "pretty-quick",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "docker-cli-js": "^2.7.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "generate-password": "^1.5.1",
+    "@kubernetes/client-node": "^0.10.1"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "prettier": {
+    "printWidth": 70,
+    "singleQuote": true
+  }
+}
