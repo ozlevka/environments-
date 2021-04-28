@@ -1,0 +1,11 @@
+more-itertools>=4,<4.1
+configparser>=3.5,<3.7
+cryptography>=1.1,<1.2
+zipp<=3
+luigi==2.7.5 
+pytest==3.8.1 
+requests>=2.4.2,<2.4.7
+python-dateutil==2.7.5
+paramiko==2.1.1
+mysql-connector-python
+tailer
