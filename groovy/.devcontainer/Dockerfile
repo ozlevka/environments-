@@ -37,6 +37,7 @@ RUN apt-get update \
     && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
     ## Install groovy
     #
+    && apt-get -y install --no-install-recommends groovy \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
