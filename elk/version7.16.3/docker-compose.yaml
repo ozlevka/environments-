@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  elastic:
+    image: elasticsearch:7.16.3
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+  kibana:
+    container_name: kb-container
+    image: kibana:7.16.3
+    ports:
+    - 5601:5601
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elastic:9200
+    depends_on:
+      - elastic
