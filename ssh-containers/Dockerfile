@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM python:3.10
 
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,15 +17,19 @@ RUN apt-get update \
     # [Optional] Add sudo support for non-root user
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME 
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && mkdir -p /home/$USERNAME/.ssh \
+    && chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh 
 
 
 
 RUN service ssh start
 
 
-COPY local.pub /home/${USERNAME}/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
+COPY dependencies.txt /tmp/depenedencies.txt
+
+RUN pip install -r /tmp/depenedencies.txt
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D","-e"]
