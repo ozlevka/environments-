@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.12
 
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,7 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
-    && apt-get -y install --no-install-recommends ca-certificates openssh-server wget curl \
+    && apt-get -y install --no-install-recommends ca-certificates openssh-server wget curl vim \
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
@@ -22,14 +22,11 @@ RUN apt-get update \
     && chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh 
 
 
-
-RUN service ssh start
-
-
-COPY sshd_config /etc/ssh/sshd_config
 COPY dependencies.txt /tmp/depenedencies.txt
 
 RUN pip install -r /tmp/depenedencies.txt
 
-EXPOSE 22
-CMD ["/usr/sbin/sshd","-D","-e"]
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+
+
