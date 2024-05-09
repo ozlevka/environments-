@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 RUN apt-get update && apt-get upgrade \
-    && apt-get install -y --no-install-recommends sudo fish jq neovim openssl git \
+    && apt-get install -y --no-install-recommends sudo fish jq neovim openssl git openssh-client \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -39,5 +39,9 @@ ENV DEBIAN_FRONTEND=
 WORKDIR /home/${USERNAME}
 
 USER ${USERNAME}
+
+RUN mkdir -p ~/.config/nvim
+
+COPY nvim/init.lua /home/$USERNAME/.config/nvim
 
 
