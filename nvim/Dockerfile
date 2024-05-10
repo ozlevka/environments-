@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 RUN apt-get update && apt-get upgrade \
-    && apt-get install -y --no-install-recommends sudo fish openssl git openssh-client \
+    && apt-get install -y --no-install-recommends sudo fish openssl git openssh-server \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -39,15 +39,17 @@ RUN apt-get update && apt-get upgrade \
     && rm -rf /var/lib/apt/lists/*
 
 ENV DEBIAN_FRONTEND=
-ENV PATH="$PATH:/opt/nvim-linux64/bin"
 
 RUN service ssh start
 
 WORKDIR /home/${USERNAME}
 
 COPY sshd_config /etc/ssh
+COPY entrypoint.sh /entrypoint.sh
 
 USER ${USERNAME}
+
+RUN echo "PATH=$PATH:/opt/nvim-linux64/bin" >> ~/.bashrc
 
 RUN mkdir -p ~/.local/share/fonts \
     && mkdir -p ~/.config/nvim \
