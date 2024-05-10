@@ -41,7 +41,11 @@ RUN apt-get update && apt-get upgrade \
 ENV DEBIAN_FRONTEND=
 ENV PATH="$PATH:/opt/nvim-linux64/bin"
 
+RUN service ssh start
+
 WORKDIR /home/${USERNAME}
+
+COPY sshd_config /etc/ssh
 
 USER ${USERNAME}
 
@@ -54,6 +58,12 @@ RUN mkdir -p ~/.local/share/fonts \
     && fc-cache -fv \
     && cd \
     && git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+
+COPY ./container.pub /home/${USERNAME}/.ssh/authorized_keys
+
+EXPOSE 22
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 
 
