@@ -30,4 +30,6 @@ RUN mv /home/${USERNAME}/.ssh/id_rsa.pub /home/${USERNAME}/.ssh/authorized_keys 
     && chown -R 1000:1000 /home/${USERNAME}/.ssh/ \
     && chmod 0600 /home/${USERNAME}/.ssh/authorized_keys
 
+ENV DEBIAN_FRONTEND=
+
 ENTRYPOINT [ "/entrypoint.sh" ]
